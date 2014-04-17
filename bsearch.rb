@@ -1,6 +1,10 @@
 require 'rubygems'
 require 'pry-debugger'
 module ArrayUtil
+
+  # # # # # # #
+  # Iterative #
+  # # # # # # #
   def self.bsearch(array, element)
     # If the array is empty return a result
     # Otherwise call your helper _bsearch method
@@ -38,4 +42,25 @@ module ArrayUtil
       return _bsearch(array, element, start_index, end_index)
     end
   end
+
+  # # # # # # #
+  # Recursive #
+  # # # # # # #
+  def self.bsearch(array, element)
+    return false if array == []
+    _bsearch(array, element, 0, array.size-1)
+  end
+
+  def self._bsearch(array, element, start_index, end_index)
+    return array[start_index] == element if start_index == end_index
+
+    midpoint = start_index + (end_index - start_index) / 2
+    
+    if element > array[midpoint]
+      _bsearch(array, element, midpoint+1, end_index)
+    else
+      _bsearch(array, element, start_index, midpoint)
+    end
+  end
 end
+
